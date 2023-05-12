@@ -71,6 +71,8 @@ export default defineComponent({
             }
             this.dataArray.push(newData)
         }
+    },components:{
+        IonBackButton
     }
 })
 
