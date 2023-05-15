@@ -22,7 +22,7 @@
           <code>QUOTATION</code>
         </ion-label>
       </ion-item>
-      <ion-item href="/list">
+      <ion-item href="/user">
         <ion-label>
           <code>USERS</code>
         </ion-label>

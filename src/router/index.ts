@@ -6,6 +6,10 @@ import MyBooking from '@/views/booking/MyBooking.vue';
 import MyQuotation from '@/views/quote/MyQuotation.vue';
 import bookingTab from "@/views/booking/TabBar.vue";
 import viewBooking from "@/views/booking/viewBooking.vue";
+import MyUser from "@/views/user/MyUser.vue";
+import MyUserTab from "@/views/user/TabBar.vue";
+import AddUser from "@/views/user/AddUser.vue";
+import Login from "@/views/auth/MyLogin.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -42,7 +46,28 @@ const routes: Array<RouteRecordRaw> = [
     path: '/quote',
     name: 'MyQuotation',
     component: MyQuotation
-  }
+  },
+  {
+    path: '/user',
+    name: 'MUser',
+    component: MyUserTab,
+    children:[
+      {
+        path: '',
+        component: () => MyUser
+      },
+    ],
+  },
+  {
+    path: '/add-user',
+    name: 'AddUser',
+    component: AddUser
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
+  },
 ]
 
 const router = createRouter({
