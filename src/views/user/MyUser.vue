@@ -1,28 +1,78 @@
 <template>
-  <myHeader title="My Bookings" ></myHeader>
+  <myHeader title="User Management"></myHeader>
   <!-- Content Block -->
-  <ion-page class="body">
+  <ion-page class="body"
+    ><br />
     <ion-content>
-      <ion-card href="/view-booking" v-for="(item, index) in dataArray" :key="index">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-card>
+              <ion-card-header>
+                <h5>Users</h5>
+                <ion-card-title><ion-icon name="person-outline"></ion-icon> 10</ion-card-title>
+                <ion-card-subtitle>Total Users</ion-card-subtitle>
+              </ion-card-header>
+            </ion-card>
+          </ion-col>
+          <ion-col>
+            <ion-card>
+              <ion-card-header>
+                <h5> Verified</h5>
+                <ion-card-title><ion-icon name="person-add-outline"></ion-icon> 3</ion-card-title>
+                <ion-card-subtitle>Recent analytics</ion-card-subtitle>
+              </ion-card-header>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-card>
+              <ion-card-header>
+                <h5>Duplicate</h5>
+                <ion-card-title><ion-icon name="people-outline"></ion-icon> 0</ion-card-title>
+                <ion-card-subtitle>Recent analytics</ion-card-subtitle>
+              </ion-card-header>
+            </ion-card>
+          </ion-col>
+          <ion-col>
+            <ion-card>
+              <ion-card-header>
+                <h5>Pending</h5>
+                <ion-card-title><ion-icon name="alarm-outline"></ion-icon> 3</ion-card-title>
+                <ion-card-subtitle>Recent analytics</ion-card-subtitle>
+              </ion-card-header>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <ion-card
+        v-for="(item, index) in dataArray"
+        :key="index"
+      >
         <ion-card-header class="rmv-p-b">
-          <ion-card-title>{{ item.customerName }}</ion-card-title>
-          <ion-card-subtitle>{{ item.id }}</ion-card-subtitle>
+          <ion-card-title>{{ item.customerName }} <ion-icon v-if="item.status !== 'active'" name="close-circle" style="font-size: 14px;" color="danger"></ion-icon></ion-card-title>
+          <ion-card-subtitle>{{ item.email }}</ion-card-subtitle>
         </ion-card-header>
 
         <ion-card-content class="rmv-p-b">
-          {{ item.description }}
+          {{ item.role }}
         </ion-card-content>
         <div class="acn-btn">
-          <ion-button size="small" color="success"
-            ><ion-icon name="checkmark-circle-outline"></ion-icon
-          ></ion-button>
-            <!-- <ion-button href="/view-booking" size="small" color="warning"
-              ><ion-icon name="eye-outline"></ion-icon
-            ></ion-button> -->
-          <!-- <ion-button size="small" color="secondary"
-            ><ion-icon name="print-outline"></ion-icon
-          ></ion-button> -->
-          <ion-button size="small" @click.prevent="deleteBooking(index)" color="danger"
+          <ion-button size="small" :color="item.status === 'active' ? 'success' : 'danger'">
+            <ion-icon name="shield-checkmark-outline"></ion-icon>
+          </ion-button>
+          <ion-button size="small" color="warning">
+            <ion-icon name="create-outline"></ion-icon>
+          </ion-button>
+          <ion-button size="small" color="secondary">
+            <ion-icon name="shield-outline"></ion-icon>
+          </ion-button>
+          <ion-button
+            size="small"
+            @click.prevent="deleteBooking(index)"
+            color="danger"
             ><ion-icon name="trash-outline"></ion-icon
           ></ion-button>
         </div>
@@ -75,6 +125,8 @@ export default defineComponent({
         isComplete: false,
         createDate: "2023-05-08",
         description: "Reservation for a bedroom",
+        role: 'Admin',
+        status: 'active',
         services: {
           serviceName: "General Cleaning",
           price: 25.0,
@@ -95,6 +147,8 @@ export default defineComponent({
         isComplete: true,
         createDate: "2023-05-07",
         description: "Reservation for a living room",
+        role: 'Client',
+        status: 'deactive',
         services: {
           serviceName: "Carpet Cleaning",
           price: 50.0,
@@ -115,6 +169,8 @@ export default defineComponent({
         isComplete: true,
         createDate: "2023-05-06",
         description: "Reservation for a bathroom",
+        role: 'N/A',
+        status: 'active',
         services: {
           serviceName: "Tile and Grout Cleaning",
           price: 35.0,
@@ -127,74 +183,14 @@ export default defineComponent({
           qty: 1,
         },
       },
-      {
-        id: 100004,
-        customerName: "David Lee",
-        companyName: "GHI LLC",
-        email: "david.lee@ghi.com",
-        amount: 90.0,
-        isComplete: false,
-        createDate: "2023-05-05",
-        description: "Reservation for a dining room",
-        services: {
-          serviceName: "Upholstery Cleaning",
-          price: 40.0,
-          description: "Cleaning of upholstered chairs and sofas",
-        },
-        roomType: {
-          roomName: "Dining Room",
-          price: 50.0,
-          qty: 1,
-        },
-      },
-      {
-        id: 100006,
-        customerName: "David Lee",
-        companyName: "GHI LLC",
-        email: "david.lee@ghi.com",
-        amount: 90.0,
-        isComplete: false,
-        createDate: "2023-05-05",
-        description: "Reservation for a dining room",
-        services: {
-          serviceName: "Upholstery Cleaning",
-          price: 40.0,
-          description: "Cleaning of upholstered chairs and sofas",
-        },
-        roomType: {
-          roomName: "Dining Room",
-          price: 50.0,
-          qty: 1,
-        },
-      },
-      {
-        id: 100008,
-        customerName: "David Lee",
-        companyName: "GHI LLC",
-        email: "david.lee@ghi.com",
-        amount: 90.0,
-        isComplete: false,
-        createDate: "2023-05-05",
-        description: "Reservation for a dining room",
-        services: {
-          serviceName: "Upholstery Cleaning",
-          price: 40.0,
-          description: "Cleaning of upholstered chairs and sofas",
-        },
-        roomType: {
-          roomName: "Dining Room",
-          price: 50.0,
-          qty: 1,
-        },
-      },
     ];
   },
   methods: {
     deleteBooking: function (index: number) {
       this.dataArray.splice(index, 1);
     },
-    viewBooking: function (){
-      this.$router.push('/view-booking')
+    viewBooking: function () {
+      this.$router.push("/view-booking");
     },
   },
   components: {
@@ -229,5 +225,14 @@ export default defineComponent({
 
 .body {
   margin-top: 40px;
+}
+
+ion-card-title {
+  display: flex;
+  align-items: center;
+}
+
+ion-card-title ion-icon {
+  margin-right: 8px;
 }
 </style>
