@@ -1,9 +1,13 @@
 <template>
-  <myHeader title="View Booking" isEnableBack="true"></myHeader>
   <ion-page>
-    <!--  Header Block -->
-    <!-- End Header Block -->
-    <!-- Content Block -->
+    <ion-header :translucent="true">
+      <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+          <ion-back-button :default-href="'/home'">Back</ion-back-button>
+        </ion-buttons>
+        <ion-title>View Booking</ion-title>
+      </ion-toolbar>
+    </ion-header>
     <ion-content>
       <br />
       <ion-item class="title">
@@ -126,7 +130,7 @@
   </ion-page>
 </template>
 
-<script>
+<script lang="ts">
 import {
   IonBackButton,
   IonButtons,
@@ -134,29 +138,39 @@ import {
   IonHeader,
   IonPage,
   IonTitle,
-  IonToolbar
+  IonToolbar,
+  IonItem,
+  IonLabel,
 } from "@ionic/vue";
 import { addOutline } from "ionicons/icons";
 import { defineComponent } from "vue";
-import myHeader from "@/views/shared/myHeader.vue";
 import axios from "axios";
 
 export default defineComponent({
-  components:{IonBackButton, myHeader},
+  name: "ViewBooking",
+  components: {
+    IonBackButton,
+    IonButtons,
+    IonContent,
+    IonHeader,
+    IonTitle,
+    IonToolbar,
+    IonItem,
+    IonLabel,
+    IonPage,
+  },
   data() {
     return {
       dataArray: [],
     };
   },
   mounted() {},
-  methods: {
-
-  },
+  methods: {},
 });
 </script>
 
 <style>
 ion-back-button {
-  display: block;
+  /* display: block; */
 }
 </style>

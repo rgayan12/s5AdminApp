@@ -1,9 +1,19 @@
 <template>
-  <myHeader title="My Bookings" ></myHeader>
-  <!-- Content Block -->
-  <ion-page class="body">
-    <ion-content>
-      <ion-card href="/view-booking" v-for="(item, index) in dataArray" :key="index">
+  <ion-page>
+    <ion-header :translucent="true">
+      <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+          <ion-menu-button color="light"></ion-menu-button>
+        </ion-buttons>
+        <ion-title>{{ $route.params.id }}</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content :scroll-y="true" class="ion-content-custom">
+      <ion-card
+        @click="viewBooking()"
+        v-for="(item, index) in dataArray"
+        :key="index"
+      >
         <ion-card-header class="rmv-p-b">
           <ion-card-title>{{ item.customerName }}</ion-card-title>
           <ion-card-subtitle>{{ item.id }}</ion-card-subtitle>
@@ -16,27 +26,30 @@
           <ion-button size="small" color="success"
             ><ion-icon name="checkmark-circle-outline"></ion-icon
           ></ion-button>
-            <!-- <ion-button href="/view-booking" size="small" color="warning"
+          <!-- <router-link to="view-booking">
+            <ion-button size="small" color="warning"
               ><ion-icon name="eye-outline"></ion-icon
-            ></ion-button> -->
+            ></ion-button>
+          </router-link> -->
           <!-- <ion-button size="small" color="secondary"
             ><ion-icon name="print-outline"></ion-icon
           ></ion-button> -->
-          <ion-button size="small" @click.prevent="deleteBooking(index)" color="danger"
+          <ion-button
+            size="small"
+            @click.stop="deleteBooking(index)"
+            color="danger"
             ><ion-icon name="trash-outline"></ion-icon
           ></ion-button>
         </div>
       </ion-card>
     </ion-content>
-
-    <!-- End Content Block-->
+    
   </ion-page>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import myHeader from "@/views/shared/myHeader.vue";
-import bookingTab from "@/views/booking/TabBar.vue";
+import TabBar from '@/views/booking/TabBar.vue';
 
 import {
   IonPage,
@@ -46,19 +59,22 @@ import {
   IonTabButton,
   IonLabel,
   IonIcon,
-} from "@ionic/vue";
-
-import {
+  IonContent,
   IonButton,
   IonCard,
   IonCardContent,
   IonCardHeader,
   IonCardSubtitle,
   IonCardTitle,
+  IonHeader,
+  IonToolbar,
+  IonButtons,
+  IonMenuButton,
+  IonTitle,
 } from "@ionic/vue";
 
 export default defineComponent({
-  name: "myList",
+  name: "MyBoking",
   data() {
     return {
       dataArray: [],
@@ -193,13 +209,11 @@ export default defineComponent({
     deleteBooking: function (index: number) {
       this.dataArray.splice(index, 1);
     },
-    viewBooking: function (){
-      this.$router.push('/view-booking')
+    viewBooking: function () {
+      this.$router.push("/view-booking");
     },
   },
   components: {
-    myHeader,
-    bookingTab,
     IonButton,
     IonCard,
     IonCardContent,
@@ -213,6 +227,13 @@ export default defineComponent({
     IonTabButton,
     IonLabel,
     IonIcon,
+    IonContent,
+    IonHeader,
+    IonToolbar,
+    IonButtons,
+    IonMenuButton,
+    IonTitle,
+    TabBar
   },
 });
 </script>
@@ -229,5 +250,10 @@ export default defineComponent({
 
 .body {
   margin-top: 40px;
+}
+
+.ion-content-custom {
+  height: calc(100vh - 56px); /* Set the desired height (subtracting header height) */
+  overflow-y: auto; /* Enable scrolling */
 }
 </style>

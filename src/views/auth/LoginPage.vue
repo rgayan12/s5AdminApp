@@ -1,22 +1,13 @@
 <template>
   <ion-page>
-    <!-- <ion-header>
-            <ion-toolbar color="primary">
-                <ion-buttons slot="start">
-                    <ion-back-button default-href="/home"></ion-back-button>
-                </ion-buttons>
-                <ion-title>S5 Cleaners</ion-title>
-            </ion-toolbar>
-    </ion-header> -->
-
     <ion-content class="ion-justify-content-center">
       <center>
-            <img
-              src="https://s5cleaners.com/frontend/assets/images/logo-new.png"
-              id="logo"
-              alt=""
-            />
-          </center>
+        <img
+          src="https://s5cleaners.com/frontend/assets/images/logo-new.png"
+          id="logo"
+          alt=""
+        />
+      </center>
       <ion-card>
         <ion-card-content>
           <ion-list>
@@ -40,7 +31,7 @@
   </ion-page>
 </template>
 
-<script>
+<script lang="ts">
 import {
   IonPage,
   IonHeader,
@@ -57,7 +48,6 @@ import {
   IonCardContent,
 } from "@ionic/vue";
 import { defineComponent } from "vue";
-import myHeader from "@/views/shared/myHeader.vue";
 
 export default defineComponent({
   name: "LoginPage",
@@ -75,7 +65,6 @@ export default defineComponent({
     IonCard,
     IonCardHeader,
     IonCardContent,
-    myHeader,
   },
   data() {
     return {
@@ -92,7 +81,6 @@ export default defineComponent({
 </script>
 
 <style scoped>
-
 ion-label,
 .logo {
   color: gray !important;
@@ -101,8 +89,7 @@ ion-label,
   width: 20%;
   margin-top: 40%;
 }
-ion-card{
-  
+ion-card {
   border-radius: 15px;
   border: 1px solid #3881ff3f;
 }

@@ -1,8 +1,13 @@
 <template>
-  <myHeader title="User Management"></myHeader>
-  <!-- Content Block -->
-  <ion-page class="body"
-    ><br />
+  <ion-page>
+    <ion-header :translucent="true">
+      <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+          <ion-menu-button color="light"></ion-menu-button>
+        </ion-buttons>
+        <ion-title>{{ $route.params.id }}</ion-title>
+      </ion-toolbar>
+    </ion-header>
     <ion-content>
       <ion-grid>
         <ion-row>
@@ -10,7 +15,10 @@
             <ion-card>
               <ion-card-header>
                 <h5>Users</h5>
-                <ion-card-title><ion-icon name="person-outline"></ion-icon> 10</ion-card-title>
+                <ion-card-title>
+                  <ion-icon name="person-outline"></ion-icon>
+                  10
+                </ion-card-title>
                 <ion-card-subtitle>Total Users</ion-card-subtitle>
               </ion-card-header>
             </ion-card>
@@ -18,8 +26,11 @@
           <ion-col>
             <ion-card>
               <ion-card-header>
-                <h5> Verified</h5>
-                <ion-card-title><ion-icon name="person-add-outline"></ion-icon> 3</ion-card-title>
+                <h5>Verified</h5>
+                <ion-card-title>
+                  <ion-icon name="person-add-outline"></ion-icon>
+                  3
+                </ion-card-title>
                 <ion-card-subtitle>Recent analytics</ion-card-subtitle>
               </ion-card-header>
             </ion-card>
@@ -30,7 +41,9 @@
             <ion-card>
               <ion-card-header>
                 <h5>Duplicate</h5>
-                <ion-card-title><ion-icon name="people-outline"></ion-icon> 0</ion-card-title>
+                <ion-card-title>
+                  <ion-icon name="people-outline"></ion-icon> 0
+                </ion-card-title>
                 <ion-card-subtitle>Recent analytics</ion-card-subtitle>
               </ion-card-header>
             </ion-card>
@@ -39,7 +52,9 @@
             <ion-card>
               <ion-card-header>
                 <h5>Pending</h5>
-                <ion-card-title><ion-icon name="alarm-outline"></ion-icon> 3</ion-card-title>
+                <ion-card-title>
+                  <ion-icon name="alarm-outline"></ion-icon> 3
+                </ion-card-title>
                 <ion-card-subtitle>Recent analytics</ion-card-subtitle>
               </ion-card-header>
             </ion-card>
@@ -47,12 +62,17 @@
         </ion-row>
       </ion-grid>
 
-      <ion-card
-        v-for="(item, index) in dataArray"
-        :key="index"
-      >
+      <ion-card v-for="(item, index) in dataArray" :key="index">
         <ion-card-header class="rmv-p-b">
-          <ion-card-title>{{ item.customerName }} <ion-icon v-if="item.status !== 'active'" name="close-circle" style="font-size: 14px;" color="danger"></ion-icon></ion-card-title>
+          <ion-card-title>
+            {{ item.customerName }}
+            <ion-icon
+              v-if="item.status !== 'active'"
+              name="close-circle"
+              style="font-size: 14px"
+              color="danger"
+            ></ion-icon>
+          </ion-card-title>
           <ion-card-subtitle>{{ item.email }}</ion-card-subtitle>
         </ion-card-header>
 
@@ -60,7 +80,10 @@
           {{ item.role }}
         </ion-card-content>
         <div class="acn-btn">
-          <ion-button size="small" :color="item.status === 'active' ? 'success' : 'danger'">
+          <ion-button
+            size="small"
+            :color="item.status === 'active' ? 'success' : 'danger'"
+          >
             <ion-icon name="shield-checkmark-outline"></ion-icon>
           </ion-button>
           <ion-button size="small" color="warning">
@@ -73,8 +96,9 @@
             size="small"
             @click.prevent="deleteBooking(index)"
             color="danger"
-            ><ion-icon name="trash-outline"></ion-icon
-          ></ion-button>
+          >
+            <ion-icon name="trash-outline"></ion-icon>
+          </ion-button>
         </div>
       </ion-card>
     </ion-content>
@@ -85,8 +109,6 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import myHeader from "@/views/shared/myHeader.vue";
-import bookingTab from "@/views/booking/TabBar.vue";
 
 import {
   IonPage,
@@ -96,19 +118,49 @@ import {
   IonTabButton,
   IonLabel,
   IonIcon,
-} from "@ionic/vue";
-
-import {
   IonButton,
   IonCard,
   IonCardContent,
   IonCardHeader,
   IonCardSubtitle,
   IonCardTitle,
+  IonGrid,
+  IonCol,
+  IonRow,
+  IonContent,
+  IonHeader,
+  IonToolbar,
+  IonButtons,
+  IonMenuButton,
+  IonTitle,
 } from "@ionic/vue";
 
 export default defineComponent({
-  name: "myList",
+  name: "Users",
+  components: {
+    IonPage,
+    IonTabs,
+    IonRouterOutlet,
+    IonTabBar,
+    IonTabButton,
+    IonLabel,
+    IonIcon,
+    IonButton,
+    IonCard,
+    IonCardContent,
+    IonCardHeader,
+    IonCardSubtitle,
+    IonCardTitle,
+    IonGrid,
+    IonCol,
+    IonRow,
+    IonContent,
+    IonHeader,
+    IonToolbar,
+    IonButtons,
+    IonMenuButton,
+    IonTitle,
+  },
   data() {
     return {
       dataArray: [],
@@ -125,8 +177,8 @@ export default defineComponent({
         isComplete: false,
         createDate: "2023-05-08",
         description: "Reservation for a bedroom",
-        role: 'Admin',
-        status: 'active',
+        role: "Admin",
+        status: "active",
         services: {
           serviceName: "General Cleaning",
           price: 25.0,
@@ -147,8 +199,8 @@ export default defineComponent({
         isComplete: true,
         createDate: "2023-05-07",
         description: "Reservation for a living room",
-        role: 'Client',
-        status: 'deactive',
+        role: "Client",
+        status: "deactive",
         services: {
           serviceName: "Carpet Cleaning",
           price: 50.0,
@@ -169,8 +221,8 @@ export default defineComponent({
         isComplete: true,
         createDate: "2023-05-06",
         description: "Reservation for a bathroom",
-        role: 'N/A',
-        status: 'active',
+        role: "N/A",
+        status: "active",
         services: {
           serviceName: "Tile and Grout Cleaning",
           price: 35.0,
@@ -192,23 +244,6 @@ export default defineComponent({
     viewBooking: function () {
       this.$router.push("/view-booking");
     },
-  },
-  components: {
-    myHeader,
-    bookingTab,
-    IonButton,
-    IonCard,
-    IonCardContent,
-    IonCardHeader,
-    IonCardSubtitle,
-    IonCardTitle,
-    IonPage,
-    IonTabs,
-    IonRouterOutlet,
-    IonTabBar,
-    IonTabButton,
-    IonLabel,
-    IonIcon,
   },
 });
 </script>

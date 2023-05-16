@@ -1,5 +1,6 @@
 <template>
   <!-- <ion-page> -->
+<ion-page>
   <ion-tabs class="footer-tab">
     <ion-router-outlet></ion-router-outlet>
     <ion-tab-bar slot="bottom">
@@ -9,6 +10,7 @@
       </ion-tab-button>
     </ion-tab-bar>
   </ion-tabs>
+</ion-page>
 
   <!-- </ion-page> -->
 </template>
@@ -20,7 +22,7 @@ import { IonPage, IonTabs, IonRouterOutlet, IonTabBar, IonTabButton, IonLabel, I
 import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle } from "@ionic/vue";
 
 export default defineComponent({
-  name: "bookingTab",
+  name: "UserTab",
   components: {
     IonButton,
     IonCard,

@@ -1,8 +1,13 @@
 <template>
-  <myHeader title="Add User" isEnableBack="true"></myHeader>
-  <!-- Content Block -->
-  <ion-page class="body"
-    ><br />
+  <ion-page>
+    <ion-header :translucent="true">
+      <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+          <ion-back-button :default-href="'/user/User%20Management'"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Add User</ion-title>
+      </ion-toolbar>
+    </ion-header>
     <ion-content>
       <ion-item>
         <ion-input label="Full Name: " placeholder="John Doe"></ion-input>
@@ -31,7 +36,9 @@
           <ion-select-option value="Admin">Company 2</ion-select-option>
         </ion-select>
       </ion-item>
-      <ion-button style="float: right;margin-right: 10px;" full color="primary">Add User</ion-button>
+      <ion-button style="float: right; margin-right: 10px" full color="primary"
+        >Add User</ion-button
+      >
     </ion-content>
 
     <!-- End Content Block-->
@@ -40,7 +47,6 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import myHeader from "@/views/shared/myHeader.vue";
 import bookingTab from "@/views/booking/TabBar.vue";
 
 import {
@@ -52,19 +58,20 @@ import {
   IonLabel,
   IonIcon,
   IonSelectOption,
-} from "@ionic/vue";
-
-import {
   IonButton,
-  IonCard,
-  IonCardContent,
-  IonCardHeader,
-  IonCardSubtitle,
-  IonCardTitle,
+  IonContent,
+  IonHeader,
+  IonTitle,
+  IonToolbar,
+  IonButtons,
+  IonBackButton,
+  IonItem,
+  IonSelect,
+  IonInput,
 } from "@ionic/vue";
 
 export default defineComponent({
-  name: "myList",
+  name: "AddUser",
   data() {
     return {
       dataArray: [],
@@ -73,14 +80,11 @@ export default defineComponent({
   mounted() {},
   methods: {},
   components: {
-    myHeader,
     bookingTab,
     IonButton,
-    IonCard,
-    IonCardContent,
-    IonCardHeader,
-    IonCardSubtitle,
-    IonCardTitle,
+    IonContent,
+    IonHeader,
+    IonTitle,
     IonPage,
     IonTabs,
     IonRouterOutlet,
@@ -89,6 +93,12 @@ export default defineComponent({
     IonLabel,
     IonIcon,
     IonSelectOption,
+    IonToolbar,
+    IonButtons,
+    IonBackButton,
+    IonItem,
+    IonSelect,
+    IonInput,
   },
 });
 </script>
