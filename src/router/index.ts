@@ -1,23 +1,51 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
-import HomePage from '@/views/HomePage.vue'
-import MyList from '@/views/MyList.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: '/',
-    redirect: '/home'
+    path: '',
+    redirect: '/folder/Home'
   },
   {
-    path: '/home',
-    name: 'Home',
-    component: HomePage
+    path: '/folder/:id',
+    component: () => import ('../views/FolderPage.vue')
   },
   {
-    path: '/list',
-    name: 'MyList',
-    component: MyList
-  }
+    path: '/booking/:id',
+    component: () => import ('../views/booking/TabBar.vue'),
+    children: [
+      {
+        path: '',
+        component: () => import ('../views/booking/BookingPage.vue'),
+      },
+    ]
+  },
+  {
+    path: '/view-booking/',
+    component: () => import ('../views/booking/ViewBooking.vue')
+  },
+  {
+    path: '/user/:id/',
+    component: () => import ('../views/user/TabBar.vue'),
+    children: [
+      {
+        path: '',
+        component: () => import ('../views/user/UserPage.vue'),
+      },
+    ]
+  },
+  {
+    path: '/add-user/',
+    component: () => import ('../views/user/AddUser.vue')
+  },
+  {
+    path: '/quotation/:id',
+    component: () => import ('../views/quote/QuotePage.vue')
+  },
+  {
+    path: '/login/',
+    component: () => import ('../views/auth/LoginPage.vue')
+  },
 ]
 
 const router = createRouter({
