@@ -94,7 +94,7 @@
           </ion-button>
           <ion-button
             size="small"
-            @click.prevent="deleteBooking(index)"
+            @click.prevent="showDeleteConfirmation(index)"
             color="danger"
           >
             <ion-icon name="trash-outline"></ion-icon>
@@ -103,12 +103,18 @@
       </ion-card>
     </ion-content>
 
-    <!-- End Content Block-->
+    <ion-alert
+        :is-open="showAlert"
+        header="Delete Confirmation"
+        message="Are you sure you want to delete this user?"
+        :buttons="alertButtons"
+        @didDismiss="showAlert = false">
+    </ion-alert>
   </ion-page>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref} from "vue";
 
 import {
   IonPage,
@@ -133,6 +139,7 @@ import {
   IonButtons,
   IonMenuButton,
   IonTitle,
+  IonAlert
 } from "@ionic/vue";
 
 export default defineComponent({
@@ -160,14 +167,24 @@ export default defineComponent({
     IonButtons,
     IonMenuButton,
     IonTitle,
+    IonAlert
   },
   data() {
     return {
       dataArray: [],
     };
   },
-  mounted() {
-    this.dataArray = [
+  methods: {
+    showDeleteConfirmation(index: number) {
+      this.selectedIndex = index;
+      this.showAlert = true;
+    },
+    viewBooking: function () {
+      this.$router.push("/view-booking");
+    },
+  },
+  setup() {
+    const dataArray = ref([
       {
         id: 100001,
         customerName: "Alice Smith",
@@ -235,15 +252,35 @@ export default defineComponent({
           qty: 1,
         },
       },
+    ]);
+    const selectedIndex = ref(-1);
+    const showAlert = ref(false);
+
+    const deleteBooking = (index) => {
+      dataArray.value.splice(index, 1);
+    };
+
+    const alertButtons = [
+      {
+        text: 'Cancel',
+        role: 'cancel',
+        handler: () => {},
+      },
+      {
+        text: 'OK',
+        role: 'confirm',
+        handler: () => {
+          deleteBooking(selectedIndex.value);
+        },
+      },
     ];
-  },
-  methods: {
-    deleteBooking: function (index: number) {
-      this.dataArray.splice(index, 1);
-    },
-    viewBooking: function () {
-      this.$router.push("/view-booking");
-    },
+
+    return {
+      dataArray,
+      showAlert,
+      selectedIndex,
+      alertButtons,
+    };
   },
 });
 </script>

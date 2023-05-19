@@ -3,7 +3,7 @@
     <ion-header :translucent="true">
       <ion-toolbar color="primary">
         <ion-buttons slot="start">
-          <ion-back-button :default-href="'/home'">Back</ion-back-button>
+          <ion-back-button :default-href="'/dashboard/Dashboard'">Back</ion-back-button>
         </ion-buttons>
         <ion-title>View Booking</ion-title>
       </ion-toolbar>
