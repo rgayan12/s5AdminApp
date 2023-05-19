@@ -54,6 +54,9 @@ import {
   IonNote,
   IonRouterOutlet,
   IonSplitPane,
+  IonHeader,
+  IonToolbar,
+  IonTitle
 } from "@ionic/vue";
 import { ref } from "vue";
 import {
@@ -63,6 +66,8 @@ import {
   bookmarkSharp,
   documentOutline,
   documentSharp,
+  gridOutline,
+  gridSharp,
   heartOutline,
   heartSharp,
   homeOutline,
@@ -83,10 +88,10 @@ import {
 const selectedIndex = ref(0);
 const appPages = [
   {
-    title: "Home",
-    url: "/folder/Home",
-    iosIcon: homeOutline,
-    mdIcon: homeSharp,
+    title: "Dashboard",
+    url: "/dashboard/Dashboard",
+    iosIcon: gridOutline,
+    mdIcon: gridSharp,
   },
   {
     title: "Booking",

@@ -34,21 +34,29 @@
           <!-- <ion-button size="small" color="secondary"
             ><ion-icon name="print-outline"></ion-icon
           ></ion-button> -->
-          <ion-button
+          <ion-button id="delete-booking"
             size="small"
-            @click.stop="deleteBooking(index)"
+            @click.stop="showDeleteConfirmation(index)"
             color="danger"
             ><ion-icon name="trash-outline"></ion-icon
           ></ion-button>
         </div>
       </ion-card>
     </ion-content>
-    
+
+    <ion-alert
+        :is-open="showAlert"
+        header="Delete Confirmation"
+        message="Are you sure you want to delete this booking?"
+        :buttons="alertButtons"
+        @didDismiss="showAlert = false">
+    </ion-alert>
+
   </ion-page>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, CustomEvent, ref } from "vue";
 import TabBar from '@/views/booking/TabBar.vue';
 
 import {
@@ -71,6 +79,7 @@ import {
   IonButtons,
   IonMenuButton,
   IonTitle,
+  IonAlert
 } from "@ionic/vue";
 
 export default defineComponent({
@@ -78,10 +87,43 @@ export default defineComponent({
   data() {
     return {
       dataArray: [],
+  
     };
   },
-  mounted() {
-    this.dataArray = [
+  methods: {
+    viewBooking: function () {
+      this.$router.push("/view-booking");
+    },
+    showDeleteConfirmation(index: number) {
+      this.selectedIndex = index;
+      this.showAlert = true;
+    },
+  },
+  components: {
+    IonButton,
+    IonCard,
+    IonCardContent,
+    IonCardHeader,
+    IonCardSubtitle,
+    IonCardTitle,
+    IonPage,
+    IonTabs,
+    IonRouterOutlet,
+    IonTabBar,
+    IonTabButton,
+    IonLabel,
+    IonIcon,
+    IonContent,
+    IonHeader,
+    IonToolbar,
+    IonButtons,
+    IonMenuButton,
+    IonTitle,
+    TabBar,
+    IonAlert
+  },
+  setup() {
+    const dataArray = ref([
       {
         id: 100001,
         customerName: "Alice Smith",
@@ -203,37 +245,35 @@ export default defineComponent({
           qty: 1,
         },
       },
+    ]);
+    const selectedIndex = ref(-1);
+    const showAlert = ref(false);
+
+    const deleteBooking = (index) => {
+      dataArray.value.splice(index, 1);
+    };
+
+    const alertButtons = [
+      {
+        text: 'Cancel',
+        role: 'cancel',
+        handler: () => {},
+      },
+      {
+        text: 'OK',
+        role: 'confirm',
+        handler: () => {
+          deleteBooking(selectedIndex.value); 
+        },
+      },
     ];
-  },
-  methods: {
-    deleteBooking: function (index: number) {
-      this.dataArray.splice(index, 1);
-    },
-    viewBooking: function () {
-      this.$router.push("/view-booking");
-    },
-  },
-  components: {
-    IonButton,
-    IonCard,
-    IonCardContent,
-    IonCardHeader,
-    IonCardSubtitle,
-    IonCardTitle,
-    IonPage,
-    IonTabs,
-    IonRouterOutlet,
-    IonTabBar,
-    IonTabButton,
-    IonLabel,
-    IonIcon,
-    IonContent,
-    IonHeader,
-    IonToolbar,
-    IonButtons,
-    IonMenuButton,
-    IonTitle,
-    TabBar
+
+    return {
+      dataArray,
+      showAlert,
+      selectedIndex,
+      alertButtons,
+    };
   },
 });
 </script>

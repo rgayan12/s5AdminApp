@@ -1,0 +1,104 @@
+{
+  "hash": "fbfa52e5",
+  "browserHash": "0ae70f87",
+  "optimized": {
+    "vue": {
+      "src": "../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
+      "file": "vue.js",
+      "fileHash": "8b069f0c",
+      "needsInterop": false
+    },
+    "@ionic/vue": {
+      "src": "../../node_modules/@ionic/vue/dist/index.js",
+      "file": "@ionic_vue.js",
+      "fileHash": "7176b0a8",
+      "needsInterop": false
+    },
+    "@ionic/vue-router": {
+      "src": "../../node_modules/@ionic/vue-router/dist/index.js",
+      "file": "@ionic_vue-router.js",
+      "fileHash": "9fca1a6d",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "index2-BFQAIKDL": {
+      "file": "index2-BFQAIKDL.js"
+    },
+    "swipe-back-C5EPDZZJ": {
+      "file": "swipe-back-C5EPDZZJ.js"
+    },
+    "index9-R33HRWED": {
+      "file": "index9-R33HRWED.js"
+    },
+    "status-tap-FS5Y2EPC": {
+      "file": "status-tap-FS5Y2EPC.js"
+    },
+    "input-shims-V4Q3Q7G6": {
+      "file": "input-shims-V4Q3Q7G6.js"
+    },
+    "keyboard-PLJ4IK4Y": {
+      "file": "keyboard-PLJ4IK4Y.js"
+    },
+    "shadow-css-R2ZGJD7G": {
+      "file": "shadow-css-R2ZGJD7G.js"
+    },
+    "chunk-IQCKCRFU": {
+      "file": "chunk-IQCKCRFU.js"
+    },
+    "chunk-75SKSCKS": {
+      "file": "chunk-75SKSCKS.js"
+    },
+    "chunk-BRAQGQFW": {
+      "file": "chunk-BRAQGQFW.js"
+    },
+    "chunk-3XCIRELR": {
+      "file": "chunk-3XCIRELR.js"
+    },
+    "chunk-NJUM2CC5": {
+      "file": "chunk-NJUM2CC5.js"
+    },
+    "chunk-WAZNGF53": {
+      "file": "chunk-WAZNGF53.js"
+    },
+    "shadow-css-Z4JHIAL2": {
+      "file": "shadow-css-Z4JHIAL2.js"
+    },
+    "focus-visible-H3JAFKK6": {
+      "file": "focus-visible-H3JAFKK6.js"
+    },
+    "chunk-MIZQEFI2": {
+      "file": "chunk-MIZQEFI2.js"
+    },
+    "hardware-back-button-2GHS3Z7K": {
+      "file": "hardware-back-button-2GHS3Z7K.js"
+    },
+    "chunk-4VUWGVEJ": {
+      "file": "chunk-4VUWGVEJ.js"
+    },
+    "ios.transition-VU5ENA4V": {
+      "file": "ios__transition-VU5ENA4V.js"
+    },
+    "chunk-VYLRZ5FK": {
+      "file": "chunk-VYLRZ5FK.js"
+    },
+    "md.transition-5QOQX7RM": {
+      "file": "md__transition-5QOQX7RM.js"
+    },
+    "chunk-4CDXEIV2": {
+      "file": "chunk-4CDXEIV2.js"
+    },
+    "chunk-DS4VW26Z": {
+      "file": "chunk-DS4VW26Z.js"
+    },
+    "chunk-EW2LJFVL": {
+      "file": "chunk-EW2LJFVL.js"
+    },
+    "chunk-RFU27QDP": {
+      "file": "chunk-RFU27QDP.js"
+    },
+    "chunk-3KZ32WGL": {
+      "file": "chunk-3KZ32WGL.js"
+    }
+  }
+}
