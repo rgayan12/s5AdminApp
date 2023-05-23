@@ -8,8 +8,8 @@
         <ion-title>{{ $route.params.id }}</ion-title>
       </ion-toolbar>
     </ion-header>
-    <ion-content>
-      <ion-card v-for="(item, index) in dataArray" :key="index">
+    <ion-content :scroll-y="true" class="ion-content-custom">
+      <ion-card @click="viewQuote()" v-for="(item, index) in dataArray" :key="index">
         <ion-card-header class="rmv-p-b">
           <ion-card-title class="cus-title">{{
             item.customerName
@@ -32,21 +32,36 @@
           <ion-button size="small" color="light"
             ><ion-icon name="create-outline"></ion-icon
           ></ion-button>
-          <ion-button size="small" color="tertiary"
-            ><ion-icon name="print-outline"></ion-icon
-          ></ion-button>
-          <ion-button size="small" color="danger"
+          <!-- <ion-button size="small" color="danger"
+            ><ion-icon name="trash-outline"></ion-icon
+          ></ion-button> -->
+          <ion-button id="delete-quote"
+            size="small"
+            @click.stop="showDeleteConfirmation(index)"
+            color="danger"
             ><ion-icon name="trash-outline"></ion-icon
           ></ion-button>
         </div>
       </ion-card>
     </ion-content>
     <!-- End Content Block-->
+
+    <!-- Start Delete Confirmation Alert -->
+    <ion-alert
+        :is-open="showAlert"
+        header="Delete Confirmation"
+        message="Are you sure you want to delete this quote?"
+        :buttons="alertButtons"
+        @didDismiss="showAlert = false">
+    </ion-alert>
+    <!-- End Delete Confirmation Alert -->
   </ion-page>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, CustomEvent, ref } from "vue";
+import TabBar from '@/views/booking/TabBar.vue';
+
 import {
   IonPage,
   IonTabs,
@@ -55,18 +70,19 @@ import {
   IonTabButton,
   IonLabel,
   IonIcon,
+  IonContent,
   IonButton,
   IonCard,
   IonCardContent,
   IonCardHeader,
   IonCardSubtitle,
   IonCardTitle,
-  IonContent,
   IonHeader,
   IonToolbar,
   IonButtons,
   IonMenuButton,
   IonTitle,
+  IonAlert
 } from "@ionic/vue";
 
 export default defineComponent({
@@ -76,8 +92,40 @@ export default defineComponent({
       dataArray: [],
     };
   },
-  mounted() {
-    this.dataArray = [
+  methods: {
+    viewQuote: function () {
+      this.$router.push("/view-quotes");
+    },
+    showDeleteConfirmation(index: number) {
+      this.selectedIndex = index;
+      this.showAlert = true;
+    }
+  },
+  components: {
+    IonButton,
+    IonCard,
+    IonCardContent,
+    IonCardHeader,
+    IonCardSubtitle,
+    IonCardTitle,
+    IonPage,
+    IonTabs,
+    IonRouterOutlet,
+    IonTabBar,
+    IonTabButton,
+    IonLabel,
+    IonIcon,
+    IonContent,
+    IonHeader,
+    IonToolbar,
+    IonButtons,
+    IonMenuButton,
+    IonTitle,
+    TabBar,
+    IonAlert
+  },
+  setup() {
+    const dataArray = ref([
       {
         id: 101001,
         customerName: "David Kim",
@@ -255,31 +303,36 @@ export default defineComponent({
           qty: 1,
         },
       },
+    ]);
+    const selectedIndex = ref(-1);
+    const showAlert = ref(false);
+
+    const deleteQuote = (index) => {
+      dataArray.value.splice(index, 1);
+    };
+
+    const alertButtons = [
+      {
+        text: 'Cancel',
+        role: 'cancel',
+        handler: () => {},
+      },
+      {
+        text: 'OK',
+        role: 'confirm',
+        handler: () => {
+          deleteQuote(selectedIndex.value); 
+        },
+      },
     ];
+
+    return {
+      dataArray,
+      showAlert,
+      selectedIndex,
+      alertButtons,
+    };
   },
-  methods: {},
-  components: {
-    IonButton,
-    IonCard,
-    IonCardContent,
-    IonCardHeader,
-    IonCardSubtitle,
-    IonCardTitle,
-    IonPage,
-    IonTabs,
-    IonRouterOutlet,
-    IonTabBar,
-    IonTabButton,
-    IonLabel,
-    IonIcon,
-    IonContent,
-    IonHeader,
-    IonToolbar,
-    IonButtons,
-    IonMenuButton,
-    IonTitle,
-  },
-  setup() {},
 });
 </script>
 
@@ -302,4 +355,10 @@ export default defineComponent({
 .body {
   margin-top: 40px;
 }
+
+.ion-content-custom {
+  height: calc(100vh - 56px); /* Set the desired height (subtracting header height) */
+  overflow-y: auto; /* Enable scrolling */
+}
+
 </style>
