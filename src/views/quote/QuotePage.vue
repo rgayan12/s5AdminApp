@@ -20,9 +20,6 @@
           {{ item.description }}
         </ion-card-content>
         <div class="acn-btn">
-          <ion-button size="small" color="warning"
-            ><ion-icon name="eye-outline"></ion-icon
-          ></ion-button>
           <ion-button size="small" color="medium"
             ><ion-icon name="calendar-outline"></ion-icon
           ></ion-button>
