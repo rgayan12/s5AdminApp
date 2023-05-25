@@ -43,6 +43,10 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import ('../views/quote/QuotePage.vue')
   },
   {
+    path: '/view-quotes/',
+    component: () => import ('../views/quote/ViewQuote.vue')
+  },
+  {
     path: '/login/',
     component: () => import ('../views/auth/LoginPage.vue')
   },
